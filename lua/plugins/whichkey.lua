@@ -12,7 +12,7 @@ return {
     plugins = {
       marks = false,
       registers = false,
-      spelling = { enabled = false, suggestions = 20 },
+      spelling = { enabled = false },
       presets = {
         operators = false,
         motions = false,
@@ -28,60 +28,41 @@ return {
     {
       "<leader>?",
       function()
-        require("which-key").show({ global = false })
+        require("which-key").show({ mode = "n", auto = true })
       end,
-      desc = "Buffer Local Keymaps (which-key)",
+      desc = "Show Which-Key (Buffer Local)",
     },
-    {
-      "<leader>s",
-      ":source %<cr>",
-      desc = "Source",
-    },
-    {
-      "<leader>Y",
-      ":%d+<cr>",
-      desc = "Delete All Text",
-    },
-    {
-      "<leader>y",
-      ":%y+<cr>",
-      desc = "Yank All Text",
-    },
-    {
-      "<leader>q",
-      ":q<cr>",
-      desc = "Quit",
-    },
-    {
-      "<leader>f",
-      ":lua vim.lsp.buf.format()<cr>",
-      desc = "Format",
-    },
-    {
-      "<leader>w",
-      ":w<cr>",
-      desc = "Save",
-    },
-    {
-      "<leader>x",
-      ":x<cr>",
-      desc = "Save & Quit",
-    },
-    {
-      "<leader>c",
-      ":bd<cr>",
-      desc = "Close Buffer",
-    },
+
+    -- File ops
+    { "<leader>w", ":w<cr>", desc = "Save" },
+    { "<leader>x", ":x<cr>", desc = "Save & Quit" },
+    { "<leader>q", ":q<cr>", desc = "Quit" },
+    { "<leader>f", function() vim.lsp.buf.format() end, desc = "Format Buffer" },
+    { "<leader>s", ":source %<cr>", desc = "Source File" },
+
+    -- Buffer ops
+    { "<leader>c", ":bd<cr>", desc = "Close Buffer" },
+    { "<leader>Y", ":%d+<cr>", desc = "Delete All Text" },
+    { "<leader>y", ":%y+<cr>", desc = "Yank All Text" },
+
+    -- UI Tools
     {
       "<leader>d",
       ":Alpha<cr>",
       desc = "Dashboard",
     },
     {
-      "<leader>C",
-      ":ChatGPT<cr>",
-      desc = "ChatGPT",
+      "<leader>e",
+      ":NvimTreeOpen<cr>",
+      desc = "Explorer Open",
     },
+    {
+      "<leader>3",
+      ":NvimTreeToggle<cr>",
+      desc = "Explorer Toggle",
+    },
+
+    -- Telescope
     {
       "<leader> ",
       ":Telescope find_files<cr>",
@@ -94,29 +75,11 @@ return {
     },
     {
       "<leader>r",
-      ":Telescope oldfiles<CR>",
+      ":Telescope oldfiles<cr>",
       desc = "Recent Files",
     },
-    {
-      "<leader>e",
-      ":NvimTreeOpen<cr>",
-      desc = "Explorer Open",
-    },
-    {
-      "<leader>3",
-      ":NvimTreeToggle<cr>",
-      desc = "Explorer Toggle",
-    },
-    {
-      "<leader>W",
-      name = "Window",
-    },
-    {
-      "<leader>h",
-      name = "Health",
-      h = { ":checkhealth<cr>", "Check Health" },
-      l = { ":checkhealth lazy<cr>", "Check Lazy Health" },
-    },
+
+    -- Group: Plugins
     {
       "<leader>p",
       name = "Plugins",
@@ -131,24 +94,20 @@ return {
       p = { ":Lazy profile<cr>", "Profile" },
       u = { ":Lazy update<cr>", "Update" },
     },
-    {
-      "<leader>t",
-      name = "Terminal/ToDo/Trouble",
-      f = { ":ToggleTerm direction=float<cr>", "Float Terminal" },
-      b = { ":ToggleTerm size=10 direction=horizontal<cr>", "Bottom Terminal" },
-      s = { ":ToggleTerm size=50 direction=vertical<cr>", "Side Terminal" },
-    },
+
+    -- Group: LSP
     {
       "<leader>l",
       name = "LSP",
       a = { ":Lspsaga code_action<cr>", "Code Action" },
-      g = { function() 
-        local lazygit
-        if not lazygit then
-          lazygit = require("toggleterm.terminal").Terminal:new({ cmd = "lazygit", direction = "float" })
-        end
-        lazygit:toggle()
-      end, "LazyGit" },
+      g = {
+        function()
+          require("toggleterm.terminal").Terminal
+            :new({ cmd = "lazygit", direction = "float" })
+            :toggle()
+        end,
+        "LazyGit",
+      },
       i = { ":LspInstall<cr>", "Install" },
       I = { ":LspInfo<cr>", "Info" },
       o = { ":Lspsaga outline<cr>", "Outline" },
@@ -156,24 +115,56 @@ return {
       d = { ":Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
       w = { ":Telescope diagnostics<cr>", "Workspace Diagnostics" },
       n = { ":Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic" },
-      k = { ":Lspsaga diagnostic_jump_prev<cr>", "Previous Diagnostic" },
+      k = { ":Lspsaga diagnostic_jump_prev<cr>", "Prev Diagnostic" },
       m = { ":Mason<cr>", "Mason Installer" },
-      s = { '<cmd>lua require("persistence").load({ last = true })<cr>', "Last Session" },
-      x = { '<cmd>lua require("persistence").load()<cr>', "Restore Last Session" },
-      e = { '<cmd>lua require("persistence").stop()<cr>', "Stop Session Persistence" },
-      t = { ":Telescope lsp_document_symbols<cr>", "Document Symbols" },
+      s = { function() require("persistence").load({ last = true }) end, "Last Session" },
+      x = { function() require("persistence").load() end, "Restore Session" },
+      e = { function() require("persistence").stop() end, "Stop Persistence" },
+      t = { ":Telescope lsp_document_symbols<cr>", "Doc Symbols" },
       T = { ":Telescope lsp_workspace_symbols<cr>", "Workspace Symbols" },
     },
+
+    -- Group: Terminal
+    {
+      "<leader>t",
+      name = "Terminal",
+      f = { ":ToggleTerm direction=float<cr>", "Float" },
+      b = { ":ToggleTerm size=10 direction=horizontal<cr>", "Bottom" },
+      s = { ":ToggleTerm size=50 direction=vertical<cr>", "Side" },
+    },
+
+    -- Group: Health
+    {
+      "<leader>h",
+      name = "Health",
+      h = { ":checkhealth<cr>", "Check Health" },
+      l = { ":checkhealth lazy<cr>", "Lazy Health" },
+    },
+
+    -- Group: Window
+    { "<leader>W", name = "Window" },
+
+    -- Group: Focus
     {
       "<leader>z",
       name = "Focus",
       z = { ":ZenMode<cr>", "Zen Mode" },
       t = { ":Twilight<cr>", "Twilight" },
     },
+
+    -- Group: Markdown Preview
     {
       "<leader>P",
       name = "Preview",
-      m = { ":MarkdownPreviewToggle<cr>", "Markdown Preview Toggle" },
+      m = { ":MarkdownPreviewToggle<cr>", "Markdown Preview" },
+    },
+
+    -- ChatGPT
+    {
+      "<leader>C",
+      ":ChatGPT<cr>",
+      desc = "ChatGPT",
     },
   },
 }
+

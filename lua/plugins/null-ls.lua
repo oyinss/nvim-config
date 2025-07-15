@@ -1,40 +1,33 @@
--- ################################################################################
--- #                                                                              #
--- #                                     NULL LS                                  #
--- #      NOTE: Injects LSP diagnostics, code actions, and more via Lua           #
--- #                                                                              #
--- ################################################################################
-
+-- lua/plugins/none-ls.lua
 return {
-  "jose-elias-alvarez/null-ls.nvim",
-  -- enabled = false,
-  event = { "BufReadPost", "BufNewFile" },
+  "nvimtools/none-ls.nvim",
+  dependencies = { "nvimtools/none-ls-extras.nvim" },
+  lazy = true,
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
-    local null_ls = require "null-ls"
-
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+    local null_ls = require("null-ls")
     local formatting = null_ls.builtins.formatting
-    -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-    -- local diagnostics = null_ls.builtins.diagnostics
+    local eslint_d  = require("none-ls.diagnostics.eslint_d")
+    local augroup   = vim.api.nvim_create_augroup("LspFormatting", {})
 
-    null_ls.setup {
-      debug = false,
+    null_ls.setup({
+      border  = "single",
       sources = {
-        formatting.prettier.with {
-          extra_filetypes = { "toml", "solidity", "md" },
-          extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" },
-        },
-        -- formatting.gofumpt,
-        -- formatting.autopep8,
-        -- formatting.stylua,
-        -- formatting.markdownlint.with {
-        --   filetypes = { "md" }
-        -- },
-        formatting.prettier,
-        formatting.clang_format.with {
-          filetypes = { "cpp", "c" },
-        },
+        formatting.prettierd.with({ extra_filetypes = { "svelte", "astro" } }),
+        formatting.stylua,
+        eslint_d,
       },
-    }
+      on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group   = augroup,
+            buffer  = bufnr,
+            callback= function() vim.lsp.buf.format({ async = false }) end,
+          })
+        end
+      end,
+    })
   end,
 }
+

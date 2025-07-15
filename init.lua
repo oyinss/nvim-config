@@ -2,7 +2,6 @@
 -- #                                                                              #
 -- #                                   INIT ROOT                                  #
 -- #                                                                              #
--- #                                                                              #
 -- ################################################################################
 
 -- LazyVim setup
@@ -24,6 +23,9 @@ vim.opt.termguicolors = true
 -- Neovide font fix
 vim.opt.guifont = { "FiraCode Nerd Font:h7" }
 
+-- 🛠️ Ensure Neovim sees system-wide tools like eslint
+vim.env.PATH = vim.env.PATH .. ':/usr/bin'
+
 -- Lazy plugins
 require('lazy').setup('plugins')
 
@@ -38,3 +40,4 @@ require('keymaps.keymaps')
 
 -- Autocmds
 require('autocmds.autocmds')
+

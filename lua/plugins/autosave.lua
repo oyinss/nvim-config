@@ -8,7 +8,7 @@
 return {
   ({
 	"Pocco81/auto-save.nvim",
-  enabled = true,
+  enabled = false,
 	config = function()
 		 require("auto-save").setup {
 			-- your config goes here
