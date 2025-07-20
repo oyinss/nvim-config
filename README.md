@@ -45,6 +45,20 @@ My setups are well-documented to ensure the greatest clarity. You can clone the 
 - Language server protocol (LSP) support via [mason](https://github.com/williamboman/mason.nvim).
 - Git integration via [lazy-git].
 
+# 📦 Usability
+
+## Which-key with space bar as leader key, then you can choose from the following options to quit, save file, format and save a file plus many other options to choose from
+
+<p align="center">
+<img src="https://github.com/Oyinbra/img/raw/main/nvim-img/img-002.png" width="800">
+</p>
+
+## File or Text search using Telescope
+
+<p align="center">
+<img src="https://github.com/Oyinbra/img/raw/main/nvim-img/img-005.png" width="800">
+</p>
+
 # 🚀 Installation and setup
 
 - Backup up your current neovim setup
@@ -75,22 +89,27 @@ rm /home/$USER/.local/share/nvim/site/pack/packer
 rm /home/$USER/.config/nvim/plugin/packer_compiled.lua
 ```
 
-# 📦 Usability
+# 🛠️ Symlink-based Configuration (For Multi-user Setup)
 
-## Which-key with space bar as leader key, then you can choose from the following options to quit, save file, format and save a file plus many other options to choose from
+To install and share this Neovim config securely among multiple users, simply:
 
-<p align="center">
-<img src="https://github.com/Oyinbra/img/raw/main/nvim-img/img-002.png" width="800">
-</p>
+1. Clone the repo into your home directory:
 
-## File or Text search using Telescope
+```bash
+git clone https://github.com/Oyinbra/nvim-config.git ~/nvim
+```
 
-<p align="center">
-<img src="https://github.com/Oyinbra/img/raw/main/nvim-img/img-005.png" width="800">
-</p>
+2. Run the included installation script:
+
+```bash
+bash ~/nvim/install_nvim.sh
+```
+
+The script will handle cloning (if needed), setting permissions, and creating symlinks for your user, root, and optionally other users.
 
 # 🐞 Find a bug?
 
 If you found an issue or would like to submit an improvement to this project, please submit an issue using the issue tab above. If you would love to submit a PR with a fix, reference the issue you created.
+
 
 
