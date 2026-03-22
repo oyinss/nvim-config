@@ -8,12 +8,14 @@
 local M = {}
 local keymap = vim.keymap.set
 
-local cmp_nvim_lsp = require "cmp_nvim_lsp"
+local ok_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
--- M.capabilities = vim.lsp.protocol.make_client_capabilities()
--- M.capabilities.offsetEncoding = { "utf-16" }
--- M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = cmp_nvim_lsp.default_capabilities()
+-- Fallback to built-in LSP capabilities when cmp_nvim_lsp is not available
+if ok_cmp and cmp_nvim_lsp and cmp_nvim_lsp.default_capabilities then
+  M.capabilities = cmp_nvim_lsp.default_capabilities()
+else
+  M.capabilities = vim.lsp.protocol.make_client_capabilities()
+end
 
 M.setup = function()
   local signs = { Error = "", Warn = "", Hint = "", Info = "" }
