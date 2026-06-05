@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-REPO_URL="https://github.com/oyinbra/nvim-config"
+REPO_URL="https://github.com/Oyinss/nvim-config"
 OWNER_USER="${SUDO_USER:-$USER}"
 OWNER_HOME=$(eval echo "~$OWNER_USER")
 NVIM_SOURCE_DIR="$OWNER_HOME/nvim"

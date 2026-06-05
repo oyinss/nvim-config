@@ -12,22 +12,22 @@
   </div>
 
   <!-- Activities -->
-  [![Made with Lua](https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?v=103&logo=lua&style=for-the-badge)](#)
-  [![Linux](https://img.shields.io/badge/Linux-%23.svg?v=103&logo=linux&color=FCC624&logoColor=black&style=for-the-badge)](#)
-  [![macOS](https://img.shields.io/badge/macOS-%23.svg?v=103&logo=apple&color=000000&logoColor=white&style=for-the-badge)](#)
-  [![Windows](https://img.shields.io/badge/Windows-%23.svg?v=103&logo=windows&color=0078D6&logoColor=white&style=for-the-badge)](#)
-  [![Neovim minimum version](https://img.shields.io/badge/Neovim-0.8+-blueviolet.svg?v=103&color=000F10&logo=Neovim&logoColor=green&labelColor=302D41&style=for-the-badge)](https://github.com/neovim/neovim/releases/tag/stable)
-  [![Top languages](https://img.shields.io/github/languages/top/Oyinbra/nvim-config?svg?v=103&style=for-the-badge)](https://github.com/Oyinbra/nvim-config/search?l=vim-script)
-  [![Commit Activity](https://img.shields.io/github/commit-activity/m/Oyinbra/nvim-config?svg?v=103&style=for-the-badge)](https://github.com/Oyinbra/nvim-config/graphs/commit-activity)
-  [![Last commit](https://img.shields.io/github/last-commit/Oyinbra/nvim-config?svg?v=103&logo=git&color=000F10&logoColor=darkorange&labelColor=302D41&style=for-the-badge)](#)
-  [![Contributors](https://img.shields.io/github/contributors/Oyinbra/nvim-config?svg?v=103&style=for-the-badge)](https://github.com/Oyinbra/nvim-config/graphs/contributors)
-  [![Repository Size](https://img.shields.io/github/repo-size/Oyinbra/nvim-config?svg?v=103&style=for-the-badge)](#)
-  
+
+[![Made with Lua](https://img.shields.io/badge/Made%20with%20Lua-blueviolet.svg?v=103&logo=lua&style=for-the-badge)](#)
+[![Linux](https://img.shields.io/badge/Linux-%23.svg?v=103&logo=linux&color=FCC624&logoColor=black&style=for-the-badge)](#)
+[![macOS](https://img.shields.io/badge/macOS-%23.svg?v=103&logo=apple&color=000000&logoColor=white&style=for-the-badge)](#)
+[![Windows](https://img.shields.io/badge/Windows-%23.svg?v=103&logo=windows&color=0078D6&logoColor=white&style=for-the-badge)](#)
+[![Neovim minimum version](https://img.shields.io/badge/Neovim-0.8+-blueviolet.svg?v=103&color=000F10&logo=Neovim&logoColor=green&labelColor=302D41&style=for-the-badge)](https://github.com/neovim/neovim/releases/tag/stable)
+[![Top languages](https://img.shields.io/github/languages/top/Oyinss/nvim-config?svg?v=103&style=for-the-badge)](https://github.com/Oyinss/nvim-config/search?l=vim-script)
+[![Commit Activity](https://img.shields.io/github/commit-activity/m/Oyinss/nvim-config?svg?v=103&style=for-the-badge)](https://github.com/Oyinss/nvim-config/graphs/commit-activity)
+[![Last commit](https://img.shields.io/github/last-commit/Oyinss/nvim-config?svg?v=103&logo=git&color=000F10&logoColor=darkorange&labelColor=302D41&style=for-the-badge)](#)
+[![Contributors](https://img.shields.io/github/contributors/Oyinss/nvim-config?svg?v=103&style=for-the-badge)](https://github.com/Oyinss/nvim-config/graphs/contributors)
+[![Repository Size](https://img.shields.io/github/repo-size/Oyinss/nvim-config?svg?v=103&style=for-the-badge)](#)
+
 </div>
 <!-- BADGE END -->
 
-    
-![Screenshot (1423)](https://github.com/Oyinbra/img/raw/main/nvim-img/img-001.png)
+![Screenshot (1423)](https://github.com/Oyinss/img/raw/main/nvim-img/img-001.png)
 
 </div>
 
@@ -50,13 +50,13 @@ My setups are well-documented to ensure the greatest clarity. You can clone the 
 ## Which-key with space bar as leader key, then you can choose from the following options to quit, save file, format and save a file plus many other options to choose from
 
 <p align="center">
-<img src="https://github.com/Oyinbra/img/raw/main/nvim-img/img-002.png" width="800">
+<img src="https://github.com/Oyinss/img/raw/main/nvim-img/img-002.png" width="800">
 </p>
 
 ## File or Text search using Telescope
 
 <p align="center">
-<img src="https://github.com/Oyinbra/img/raw/main/nvim-img/img-005.png" width="800">
+<img src="https://github.com/Oyinss/img/raw/main/nvim-img/img-005.png" width="800">
 </p>
 
 # 🚀 Installation and setup
@@ -71,7 +71,7 @@ mv ~/.local/share/nvim ~/.local/share/nvim.bak
 - Clone the stater park into your .config folder
 
 ```
-git clone https://github.com/Oyinbra/nvim-config.git ~/.config/nvim
+git clone https://github.com/Oyinss/nvim-config.git ~/.config/nvim
 ```
 
 - Then start Neovim
@@ -96,7 +96,7 @@ To install and share this Neovim config securely among multiple users, simply:
 1. Clone the repo into your home directory:
 
 ```bash
-git clone https://github.com/Oyinbra/nvim-config.git ~/nvim
+git clone https://github.com/Oyinss/nvim-config.git ~/nvim
 ```
 
 2. Run the included installation script:
@@ -110,6 +110,3 @@ The script will handle cloning (if needed), setting permissions, and creating sy
 # 🐞 Find a bug?
 
 If you found an issue or would like to submit an improvement to this project, please submit an issue using the issue tab above. If you would love to submit a PR with a fix, reference the issue you created.
-
-
-

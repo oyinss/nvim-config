@@ -1,6 +1,6 @@
 <div align="center">
  
-  [![Email](https://img.shields.io/badge/Email-red.svg?style=for-the-badge&logo=mail.ru&logoColor=white)](mailto:github-oyinbra@outlook.com)
+  [![Email](https://img.shields.io/badge/Email-red.svg?style=for-the-badge&logo=mail.ru&logoColor=white)](mailto:github-Oyinss@outlook.com)
 
 </div>
 
@@ -10,8 +10,8 @@
 
 Neovim supported version
 
-| Version | Supported          |
-| ------- | ------------------ |
+| Version  | Supported          |
+| -------- | ------------------ |
 | >= 0.8.x | :white_check_mark: |
 
 ## 🚫 Reporting a Vulnerability
