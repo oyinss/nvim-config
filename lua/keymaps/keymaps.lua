@@ -11,6 +11,11 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 local keymap = vim.keymap
 
+local function feedkeys(keys)
+  local termcodes = vim.api.nvim_replace_termcodes(keys, true, false, true)
+  vim.api.nvim_feedkeys(termcodes, "nx", false)
+end
+
 -- Better window navigation
 map('n', '<C-h>', '<C-w>h', opts)
 map('n', '<C-l>', '<C-w>l', opts)
@@ -34,16 +39,16 @@ map('i', 'KJ', '<ESC>', opts)
 map('v', '<', '<gv', opts)
 map('v', '>', '>gv', opts)
 
-map("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>",
+map("n", "<C-u>", "<cmd>lua require('keymaps.keymaps').scroll_up()<cr>",
   { noremap = true, silent = true })
-map("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>",
+map("n", "<C-d>", "<cmd>lua require('keymaps.keymaps').scroll_down()<cr>",
   { noremap = true, silent = true })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>Q', vim.diagnostic.setloclist, { desc = "Diagnostics List" })
 
 -- Insert a blank line below or above current line (do not move the cursor),
 -- see https://stackoverflow.com/a/16136133/6064933
@@ -95,5 +100,13 @@ map("n", "<leader>W-", "<C-W>s", { desc = "Split window below" })
 map("n", "<leader>W|", "<C-W>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
 map("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
+
+function M.scroll_up()
+  feedkeys("<C-u>")
+end
+
+function M.scroll_down()
+  feedkeys("<C-d>")
+end
 
 return M

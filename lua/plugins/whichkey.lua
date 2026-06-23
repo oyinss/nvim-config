@@ -1,10 +1,3 @@
--- ###############################################################################
--- #                                                                              #
--- #                                WHICHKEY CONFIG                               #
--- #                     NOTE: Create key bindings that stick                     #
--- #                                                                              #
--- ################################################################################
-
 return {
   "folke/which-key.nvim",
   event = "VeryLazy",
@@ -24,69 +17,100 @@ return {
       },
     },
     spec = {
-      { "<leader>p", group = "Plugins" },
-      { "<leader>l", group = "LSP" },
-      { "<leader>t", group = "Terminal" },
-      { "<leader>h", group = "Health" },
-      { "<leader>W", group = "Window" },
-      { "<leader>z", group = "Focus" },
-      { "<leader>P", group = "Preview" },
+      { "<leader>p", group = "Plugins", icon = { icon = "󱁤", color = "purple" } },
+      { "<leader>l", group = "LSP", icon = { icon = "󰒍", color = "blue" } },
+      { "<leader>t", group = "Terminal", icon = { icon = "", color = "green" } },
+      { "<leader>h", group = "Health", icon = { icon = "󰋙", color = "yellow" } },
+      { "<leader>W", group = "Window", icon = { icon = "", color = "cyan" } },
+      { "<leader>z", group = "Focus", icon = { icon = "󰈈", color = "orange" } },
+      { "<leader>P", group = "Preview", icon = { icon = "", color = "magenta" } },
+      { "<leader>?", icon = { icon = "󰌐", color = "cyan" } },
+      { "<leader>w", icon = { icon = "󰆓", color = "green" } },
+      { "<leader>x", icon = { icon = "󰄛", color = "red" } },
+      { "<leader>q", icon = { icon = "󰅙", color = "red" } },
+      { "<leader>f", icon = { icon = "󰉼", color = "blue" } },
+      { "<leader>s", icon = { icon = "󰑓", color = "yellow" } },
+      { "<leader>c", icon = { icon = "󰅖", color = "red" } },
+      { "<leader>Y", icon = { icon = "󰆴", color = "red" } },
+      { "<leader>y", icon = { icon = "󰆓", color = "yellow" } },
+      { "<leader>d", icon = { icon = "󱓞", color = "magenta" } },
+      { "<leader>e", icon = { icon = "󰙅", color = "blue" } },
+      { "<leader>3", icon = { icon = "󰙅", color = "blue" } },
+      { "<leader> ", icon = { icon = "󰍉", color = "cyan" } },
+      { "<leader>F", icon = { icon = "󰈞", color = "cyan" } },
+      { "<leader>r", icon = { icon = "󰋚", color = "cyan" } },
+      { "<leader>pc", icon = { icon = "󰩺", color = "red" } },
+      { "<leader>pC", icon = { icon = "󱂈", color = "yellow" } },
+      { "<leader>pd", icon = { icon = "󰃤", color = "red" } },
+      { "<leader>pi", icon = { icon = "󰏖", color = "green" } },
+      { "<leader>ps", icon = { icon = "󰑖", color = "blue" } },
+      { "<leader>pl", icon = { icon = "󰆍", color = "cyan" } },
+      { "<leader>ph", icon = { icon = "󰖟", color = "yellow" } },
+      { "<leader>pH", icon = { icon = "󰋖", color = "yellow" } },
+      { "<leader>pp", icon = { icon = "󰤟", color = "magenta" } },
+      { "<leader>pu", icon = { icon = "󰚰", color = "green" } },
+      { "<leader>la", icon = { icon = "󰘦", color = "blue" } },
+      { "<leader>lg", icon = { icon = "󰊢", color = "green" } },
+      { "<leader>li", icon = { icon = "󰚺", color = "green" } },
+      { "<leader>lI", icon = { icon = "󰋼", color = "cyan" } },
+      { "<leader>lo", icon = { icon = "󰆧", color = "blue" } },
+      { "<leader>lr", icon = { icon = "󰑕", color = "yellow" } },
+      { "<leader>rn", icon = { icon = "󰑕", color = "yellow" } },
+      { "<leader>ld", icon = { icon = "󰙎", color = "red" } },
+      { "<leader>lw", icon = { icon = "󰙎", color = "red" } },
+      { "<leader>ln", icon = { icon = "󰒲", color = "red" } },
+      { "<leader>lk", icon = { icon = "󰒳", color = "red" } },
+      { "<leader>lm", icon = { icon = "󰏗", color = "blue" } },
+      { "<leader>ls", icon = { icon = "󰒡", color = "yellow" } },
+      { "<leader>lx", icon = { icon = "󰗼", color = "green" } },
+      { "<leader>le", icon = { icon = "󰚌", color = "red" } },
+      { "<leader>lt", icon = { icon = "󰉿", color = "cyan" } },
+      { "<leader>lT", icon = { icon = "󰉿", color = "cyan" } },
+      { "<leader>tf", icon = { icon = "󰞷", color = "green" } },
+      { "<leader>tb", icon = { icon = "󰝘", color = "green" } },
+      { "<leader>ts", icon = { icon = "󰝘", color = "green" } },
+      { "<leader>hh", icon = { icon = "󰓅", color = "yellow" } },
+      { "<leader>hl", icon = { icon = "󰓅", color = "yellow" } },
+      { "<leader>zz", icon = { icon = "󰖔", color = "magenta" } },
+      { "<leader>zt", icon = { icon = "󰖔", color = "magenta" } },
+      { "<leader>Pm", icon = { icon = "󰍔", color = "blue" } },
+      { "<leader>C", icon = { icon = "󰭻", color = "green" } },
     },
   },
   keys = {
+    { "<leader>?", function() require("which-key").show({ mode = "n", auto = true }) end, desc = "Show Which-Key (Buffer Local)" },
     {
-      "<leader>?",
+      "<leader>R",
       function()
-        require("which-key").show({ mode = "n", auto = true })
+        for module, _ in pairs(package.loaded) do
+          if module == "theme"
+            or module:match("^options")
+            or module:match("^keymaps")
+            or module:match("^autocmds")
+            or module:match("^plugins")
+          then
+            package.loaded[module] = nil
+          end
+        end
+        dofile(vim.env.MYVIMRC)
+        vim.notify("Neovim config reloaded", vim.log.levels.INFO)
       end,
-      desc = "Show Which-Key (Buffer Local)",
+      desc = "Reload Config",
     },
-
-    -- File ops
     { "<leader>w", ":w<cr>", desc = "Save" },
     { "<leader>x", ":x<cr>", desc = "Save & Quit" },
+    { "<leader>q", ":q<cr>", desc = "Quit" },
     { "<leader>f", function() vim.lsp.buf.format() end, desc = "Format Buffer" },
     { "<leader>s", ":source %<cr>", desc = "Source File" },
-
-    -- Buffer ops
     { "<leader>c", ":bd<cr>", desc = "Close Buffer" },
     { "<leader>Y", ":%d+<cr>", desc = "Delete All Text" },
     { "<leader>y", ":%y+<cr>", desc = "Yank All Text" },
-
-    -- UI Tools
-    {
-      "<leader>d",
-      ":Alpha<cr>",
-      desc = "Dashboard",
-    },
-    {
-      "<leader>e",
-      ":NvimTreeOpen<cr>",
-      desc = "Explorer Open",
-    },
-    {
-      "<leader>3",
-      ":NvimTreeToggle<cr>",
-      desc = "Explorer Toggle",
-    },
-
-    -- Telescope
-    {
-      "<leader> ",
-      ":Telescope find_files<cr>",
-      desc = "Find Files",
-    },
-    {
-      "<leader>F",
-      ":Telescope live_grep<cr>",
-      desc = "Find Text",
-    },
-    {
-      "<leader>r",
-      ":Telescope oldfiles<cr>",
-      desc = "Recent Files",
-    },
-
+    { "<leader>d", ":Alpha<cr>", desc = "Dashboard" },
+    { "<leader>e", ":NvimTreeOpen<cr>", desc = "Explorer Open" },
+    { "<leader>3", ":NvimTreeToggle<cr>", desc = "Explorer Toggle" },
+    { "<leader> ", ":Telescope find_files<cr>", desc = "Find Files" },
+    { "<leader>F", ":Telescope live_grep<cr>", desc = "Find Text" },
+    { "<leader>r", ":Telescope oldfiles<cr>", desc = "Recent Files" },
     { "<leader>pc", ":Lazy clean<cr>", desc = "Clean" },
     { "<leader>pC", ":Lazy check<cr>", desc = "Check" },
     { "<leader>pd", ":Lazy debug<cr>", desc = "Debug" },
@@ -97,21 +121,17 @@ return {
     { "<leader>pH", ":Lazy help<cr>", desc = "Help" },
     { "<leader>pp", ":Lazy profile<cr>", desc = "Profile" },
     { "<leader>pu", ":Lazy update<cr>", desc = "Update" },
-
     { "<leader>la", ":Lspsaga code_action<cr>", desc = "Code Action" },
-    {
-      "<leader>lg",
-      function()
+    { "<leader>lg", function()
         require("toggleterm.terminal").Terminal
           :new({ cmd = "lazygit", direction = "float" })
           :toggle()
-      end,
-      desc = "LazyGit",
-    },
+      end, desc = "LazyGit" },
     { "<leader>li", ":LspInstall<cr>", desc = "Install" },
     { "<leader>lI", ":LspInfo<cr>", desc = "Info" },
     { "<leader>lo", ":Lspsaga outline<cr>", desc = "Outline" },
     { "<leader>lr", ":Lspsaga rename<cr>", desc = "Rename" },
+    { "<leader>rn", "<cmd>lua require('renamer').rename()<cr>", desc = "Rename (Renamer)" },
     { "<leader>ld", ":Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
     { "<leader>lw", ":Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
     { "<leader>ln", ":Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic" },
@@ -122,19 +142,14 @@ return {
     { "<leader>le", function() require("persistence").stop() end, desc = "Stop Persistence" },
     { "<leader>lt", ":Telescope lsp_document_symbols<cr>", desc = "Doc Symbols" },
     { "<leader>lT", ":Telescope lsp_workspace_symbols<cr>", desc = "Workspace Symbols" },
-
     { "<leader>tf", ":ToggleTerm direction=float<cr>", desc = "Float" },
     { "<leader>tb", ":ToggleTerm size=10 direction=horizontal<cr>", desc = "Bottom" },
     { "<leader>ts", ":ToggleTerm size=50 direction=vertical<cr>", desc = "Side" },
-
     { "<leader>hh", ":checkhealth<cr>", desc = "Check Health" },
     { "<leader>hl", ":checkhealth lazy<cr>", desc = "Lazy Health" },
-
     { "<leader>zz", ":ZenMode<cr>", desc = "Zen Mode" },
     { "<leader>zt", ":Twilight<cr>", desc = "Twilight" },
-
     { "<leader>Pm", ":MarkdownPreviewToggle<cr>", desc = "Markdown Preview" },
-
     { "<leader>C", ":ChatGPT<cr>", desc = "ChatGPT" },
   },
 }
