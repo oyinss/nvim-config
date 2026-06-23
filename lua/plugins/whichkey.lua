@@ -23,6 +23,15 @@ return {
         g = false,
       },
     },
+    spec = {
+      { "<leader>p", group = "Plugins" },
+      { "<leader>l", group = "LSP" },
+      { "<leader>t", group = "Terminal" },
+      { "<leader>h", group = "Health" },
+      { "<leader>W", group = "Window" },
+      { "<leader>z", group = "Focus" },
+      { "<leader>P", group = "Preview" },
+    },
   },
   keys = {
     {
@@ -36,7 +45,6 @@ return {
     -- File ops
     { "<leader>w", ":w<cr>", desc = "Save" },
     { "<leader>x", ":x<cr>", desc = "Save & Quit" },
-    { "<leader>q", ":q<cr>", desc = "Quit" },
     { "<leader>f", function() vim.lsp.buf.format() end, desc = "Format Buffer" },
     { "<leader>s", ":source %<cr>", desc = "Source File" },
 
@@ -79,92 +87,54 @@ return {
       desc = "Recent Files",
     },
 
-    -- Group: Plugins
-    {
-      "<leader>p",
-      name = "Plugins",
-      c = { ":Lazy clean<cr>", "Clean" },
-      C = { ":Lazy check<cr>", "Check" },
-      d = { ":Lazy debug<cr>", "Debug" },
-      i = { ":Lazy install<cr>", "Install" },
-      s = { ":Lazy sync<cr>", "Sync" },
-      l = { ":Lazy log<cr>", "Log" },
-      h = { ":Lazy home<cr>", "Home" },
-      H = { ":Lazy help<cr>", "Help" },
-      p = { ":Lazy profile<cr>", "Profile" },
-      u = { ":Lazy update<cr>", "Update" },
-    },
+    { "<leader>pc", ":Lazy clean<cr>", desc = "Clean" },
+    { "<leader>pC", ":Lazy check<cr>", desc = "Check" },
+    { "<leader>pd", ":Lazy debug<cr>", desc = "Debug" },
+    { "<leader>pi", ":Lazy install<cr>", desc = "Install" },
+    { "<leader>ps", ":Lazy sync<cr>", desc = "Sync" },
+    { "<leader>pl", ":Lazy log<cr>", desc = "Log" },
+    { "<leader>ph", ":Lazy home<cr>", desc = "Home" },
+    { "<leader>pH", ":Lazy help<cr>", desc = "Help" },
+    { "<leader>pp", ":Lazy profile<cr>", desc = "Profile" },
+    { "<leader>pu", ":Lazy update<cr>", desc = "Update" },
 
-    -- Group: LSP
+    { "<leader>la", ":Lspsaga code_action<cr>", desc = "Code Action" },
     {
-      "<leader>l",
-      name = "LSP",
-      a = { ":Lspsaga code_action<cr>", "Code Action" },
-      g = {
-        function()
-          require("toggleterm.terminal").Terminal
-            :new({ cmd = "lazygit", direction = "float" })
-            :toggle()
-        end,
-        "LazyGit",
-      },
-      i = { ":LspInstall<cr>", "Install" },
-      I = { ":LspInfo<cr>", "Info" },
-      o = { ":Lspsaga outline<cr>", "Outline" },
-      r = { ":Lspsaga rename<cr>", "Rename" },
-      d = { ":Telescope diagnostics bufnr=0<cr>", "Document Diagnostics" },
-      w = { ":Telescope diagnostics<cr>", "Workspace Diagnostics" },
-      n = { ":Lspsaga diagnostic_jump_next<cr>", "Next Diagnostic" },
-      k = { ":Lspsaga diagnostic_jump_prev<cr>", "Prev Diagnostic" },
-      m = { ":Mason<cr>", "Mason Installer" },
-      s = { function() require("persistence").load({ last = true }) end, "Last Session" },
-      x = { function() require("persistence").load() end, "Restore Session" },
-      e = { function() require("persistence").stop() end, "Stop Persistence" },
-      t = { ":Telescope lsp_document_symbols<cr>", "Doc Symbols" },
-      T = { ":Telescope lsp_workspace_symbols<cr>", "Workspace Symbols" },
+      "<leader>lg",
+      function()
+        require("toggleterm.terminal").Terminal
+          :new({ cmd = "lazygit", direction = "float" })
+          :toggle()
+      end,
+      desc = "LazyGit",
     },
+    { "<leader>li", ":LspInstall<cr>", desc = "Install" },
+    { "<leader>lI", ":LspInfo<cr>", desc = "Info" },
+    { "<leader>lo", ":Lspsaga outline<cr>", desc = "Outline" },
+    { "<leader>lr", ":Lspsaga rename<cr>", desc = "Rename" },
+    { "<leader>ld", ":Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
+    { "<leader>lw", ":Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
+    { "<leader>ln", ":Lspsaga diagnostic_jump_next<cr>", desc = "Next Diagnostic" },
+    { "<leader>lk", ":Lspsaga diagnostic_jump_prev<cr>", desc = "Prev Diagnostic" },
+    { "<leader>lm", ":Mason<cr>", desc = "Mason Installer" },
+    { "<leader>ls", function() require("persistence").load({ last = true }) end, desc = "Last Session" },
+    { "<leader>lx", function() require("persistence").load() end, desc = "Restore Session" },
+    { "<leader>le", function() require("persistence").stop() end, desc = "Stop Persistence" },
+    { "<leader>lt", ":Telescope lsp_document_symbols<cr>", desc = "Doc Symbols" },
+    { "<leader>lT", ":Telescope lsp_workspace_symbols<cr>", desc = "Workspace Symbols" },
 
-    -- Group: Terminal
-    {
-      "<leader>t",
-      name = "Terminal",
-      f = { ":ToggleTerm direction=float<cr>", "Float" },
-      b = { ":ToggleTerm size=10 direction=horizontal<cr>", "Bottom" },
-      s = { ":ToggleTerm size=50 direction=vertical<cr>", "Side" },
-    },
+    { "<leader>tf", ":ToggleTerm direction=float<cr>", desc = "Float" },
+    { "<leader>tb", ":ToggleTerm size=10 direction=horizontal<cr>", desc = "Bottom" },
+    { "<leader>ts", ":ToggleTerm size=50 direction=vertical<cr>", desc = "Side" },
 
-    -- Group: Health
-    {
-      "<leader>h",
-      name = "Health",
-      h = { ":checkhealth<cr>", "Check Health" },
-      l = { ":checkhealth lazy<cr>", "Lazy Health" },
-    },
+    { "<leader>hh", ":checkhealth<cr>", desc = "Check Health" },
+    { "<leader>hl", ":checkhealth lazy<cr>", desc = "Lazy Health" },
 
-    -- Group: Window
-    { "<leader>W", name = "Window" },
+    { "<leader>zz", ":ZenMode<cr>", desc = "Zen Mode" },
+    { "<leader>zt", ":Twilight<cr>", desc = "Twilight" },
 
-    -- Group: Focus
-    {
-      "<leader>z",
-      name = "Focus",
-      z = { ":ZenMode<cr>", "Zen Mode" },
-      t = { ":Twilight<cr>", "Twilight" },
-    },
+    { "<leader>Pm", ":MarkdownPreviewToggle<cr>", desc = "Markdown Preview" },
 
-    -- Group: Markdown Preview
-    {
-      "<leader>P",
-      name = "Preview",
-      m = { ":MarkdownPreviewToggle<cr>", "Markdown Preview" },
-    },
-
-    -- ChatGPT
-    {
-      "<leader>C",
-      ":ChatGPT<cr>",
-      desc = "ChatGPT",
-    },
+    { "<leader>C", ":ChatGPT<cr>", desc = "ChatGPT" },
   },
 }
-
