@@ -24,7 +24,7 @@ return {
     "windwp/nvim-ts-autotag",
     event = "InsertEnter"
   },
-  { "p00f/nvim-ts-rainbow" },
+  { "p00f/nvim-ts-rainbow", enabled = false },
   {
     "folke/which-key.nvim",
     event = "BufWinEnter",
