@@ -41,11 +41,24 @@ vim.opt.termguicolors = true
 -- Neovide font fix
 vim.opt.guifont = { "FiraCode Nerd Font:h7" }
 
--- 🛠️ Ensure Neovim sees system-wide tools like eslint
-vim.env.PATH = vim.env.PATH .. ':/usr/bin'
+-- Ensure Neovim sees tools installed by Mason and user-level package managers.
+vim.env.PATH = table.concat({
+  vim.env.PATH,
+  vim.fn.stdpath("data") .. "/mason/bin",
+  vim.fn.expand("~/.local/bin"),
+  vim.fn.expand("~/.cargo/bin"),
+  "/usr/bin",
+}, ":")
 
 -- Lazy plugins
-require('lazy').setup('plugins')
+require('lazy').setup({
+  spec = {
+    { import = "plugins" },
+  },
+  rocks = {
+    enabled = false,
+  },
+})
 
 -- Themes settings
 require('theme')
@@ -58,4 +71,3 @@ require('keymaps.keymaps')
 
 -- Autocmds
 require('autocmds.autocmds')
-
