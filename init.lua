@@ -15,6 +15,24 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Replace deprecated vim.tbl_flatten with a non-deprecated implementation
+-- if possible, to avoid deprecation messages from plugins that call it.
+do
+  if vim.tbl_flatten then
+    local ok, _ = pcall(function()
+      -- only override if `vim.iter` is available (Neovim 0.10+)
+      if vim.iter then
+        vim.tbl_flatten = function(t)
+          return vim.iter(t):flatten(math.huge):totable()
+        end
+      end
+    end)
+    if not ok then
+      -- leave existing function in place if override fails
+    end
+  end
+end
+
 -- Set space bar as Leader Key and termguicolors as true
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
