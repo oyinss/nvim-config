@@ -92,8 +92,10 @@ return {
             package.loaded[module] = nil
           end
         end
-        dofile(vim.env.MYVIMRC)
-        vim.notify("Neovim config reloaded", vim.log.levels.INFO)
+        require("lazy.manage.reloader").reload({
+          { file = vim.env.MYVIMRC, what = "manual reload" },
+        })
+        vim.notify("Reloading Neovim config", vim.log.levels.INFO)
       end,
       desc = "Reload Config",
     },
